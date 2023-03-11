@@ -1,0 +1,30 @@
+.image-container {
+    width: 100%;
+    text-align: left;
+}
+
+.image {
+    overflow: hidden;
+    width: 100%;
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.25s ease-in-out;
+    border-radius: 0.5em;
+    outline-offset: 2px;
+    aspect-ratio: 3/2;
+    object-fit: cover;
+}
+
+.image:hover {
+    transform: scale(1.01);
+}
+
+.image:active {
+    outline: #5d91ff 3px solid;
+    outline-offset: 2px;
+}
+
+.image.selected {
+    outline: #0f3d98 3px solid;
+    outline-offset: 2px;
+}

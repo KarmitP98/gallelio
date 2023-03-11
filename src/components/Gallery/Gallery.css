@@ -1,0 +1,9 @@
+.images {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    padding: 2em 0;
+    grid-gap: 3em 2em;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-rows: auto;
+}

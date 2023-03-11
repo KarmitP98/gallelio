@@ -1,26 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useEffect, useState} from 'react';
 import './App.css';
+import {FETCH_URL} from './constants/api';
+import Gallery from './components/Gallery/Gallery';
+import {ImageModel} from './models/image.model';
+import TabBar from './components/TabBar/TabBar';
+import {useDispatch} from 'react-redux';
+import {setImages} from './store/images/images.actions';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+	
+	const initialData: ImageModel[] = [];
+	const [favouritesOnly, setFavouritesOnly] = useState(false);
+	const dispatch = useDispatch();
+	
+	useEffect(() => {
+		fetchData();
+	}, []);
+	
+	const fetchData = async () => {
+		const json = await fetch(FETCH_URL, {method: 'GET'});
+		const data: ImageModel[] = await json.json();
+		
+		// Set the images in the state
+		dispatch(setImages(data))
+	};
+	
+	return (
+	  <div className='app'>
+		  <section className='content-section'>
+			  <h1>Gallelio</h1>
+			  <TabBar setFavouritesOnly={setFavouritesOnly} favouritesOnly={favouritesOnly}/>
+			  <Gallery favoritesOnly={favouritesOnly}/>
+		  </section>
+	  </div>
+	);
+};
 
 export default App;
