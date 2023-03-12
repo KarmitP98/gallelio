@@ -85,6 +85,7 @@ const ImageDetails = ({showNotification}: ImageDetailsProps) => {
 				<button className='btn outline danger block' type={'button'} onClick={deleteCurrentImage}>
 				  Delete
 				</button>
+				<br/>
 			  </>
 		  }
 		  {
