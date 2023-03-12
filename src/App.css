@@ -13,6 +13,12 @@
   padding: 2em 3em;
   background-color: rgba(211, 211, 211, 0.1);
   border-right: 2px solid var(--light-gray);
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.detail-section{
+  position: relative;
 }
 
 h1{
