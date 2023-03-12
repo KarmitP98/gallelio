@@ -17,10 +17,58 @@
   overflow-y: auto;
 }
 
-.detail-section{
-  position: relative;
+.detail-section {
+    position: relative;
 }
 
-h1{
-  padding-bottom: 1em;
+h1 {
+    padding-bottom: 1em;
+}
+
+@media screen and (width < 1366px) {
+    .app {
+        grid-template-columns: 100%;
+    }
+
+    .detail-section {
+        position: fixed;
+        z-index: 2;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100vh;
+        transition: all 0.25s ease-in-out;
+        transform: translateX(100%);
+        background-color: white;
+        box-shadow: -10px 0 10px 5px var(--hover-gray);
+    }
+
+    .detail-section.show {
+        transform: translateX(0);
+    }
+}
+
+@media screen and (width < 481px) {
+    .content-section {
+        padding: 2em;
+    }
+}
+
+
+@media screen and (width > 481px) {
+    .detail-section {
+        width: 40%;
+    }
+}
+
+@media screen and (width > 1366px) {
+    .detail-section {
+        width: 100%;
+    }
+}
+
+@media screen and (width < 786px) and (width > 481px) {
+    .detail-section {
+        width: 70%;
+    }
 }

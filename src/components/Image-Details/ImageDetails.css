@@ -36,18 +36,38 @@
 }
 
 .none-selected{
-    width: 100%;
-    padding: 20vh 0;
     display: flex;
-    justify-content: center;
     align-items: center;
-    text-align: center;
     flex-flow: column nowrap;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    text-align: center;
 }
 
-.none-selected > h2{
+.none-selected > h2 {
     display: flex;
     align-items: center;
-    gap: 0.5em;
     color: var(--primary);
+    gap: 0.5em;
+}
+
+.action-bar {
+    display: none;
+}
+
+@media screen and (width < 1366px) {
+    .action-bar {
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        flex-flow: row-reverse;
+        width: 100%;
+        padding-bottom: 2em;
+    }
+
+    button {
+        font-weight: 600;
+        color: var(--gray);
+    }
 }

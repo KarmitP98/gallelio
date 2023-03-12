@@ -14,7 +14,7 @@ const Gallery = ({favoritesOnly = false}: GalleryProps) => {
 	
 	const images = useSelector((state: InitialState) => state.images);
 	
-	const getImages = () => favoritesOnly ? images.filter((image: ImageModel) => image.favorited) : images.sort((image1: ImageModel, image2: ImageModel) => new Date(image1.createdAt) > new Date(image2.createdAt) ? -1: 1);
+	const getImages = () => favoritesOnly ? images.filter((image: ImageModel) => image.favorited) : images;
 	
 	return (
 	  <>

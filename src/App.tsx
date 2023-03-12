@@ -8,7 +8,6 @@ import {useDispatch, useSelector} from 'react-redux';
 import {setImages} from './store/images/images.actions';
 import ImageDetails from './components/Image-Details/Image-Details';
 import {InitialState} from './store/images/images.reducer';
-import Notification from './components/Notification/Notification';
 
 const App = () => {
 	
@@ -23,19 +22,18 @@ const App = () => {
 	const fetchData = async () => {
 		const json = await fetch(FETCH_URL, {method: 'GET'});
 		const data: ImageModel[] = await json.json();
-		
 		// Set the images in the state
-		dispatch(setImages(data))
+		dispatch(setImages(data.sort((image1: ImageModel, image2: ImageModel) => new Date(image1.createdAt) > new Date(image2.createdAt) ? -1 : 1)));
 	};
 	
 	return (
 	  <div className={`app`}>
 		  <section className='content-section'>
-			  <h1>Gallelio</h1>
+			  <h1>Galleria</h1>
 			  <TabBar setFavouritesOnly={setFavouritesOnly} favouritesOnly={favouritesOnly}/>
 			  <Gallery favoritesOnly={favouritesOnly}/>
 		  </section>
-		  <div className='detail-section'>
+		  <div className={`${selectedImage ? 'show' : ''} detail-section`}>
 			  <ImageDetails/>
 		  </div>
 	  </div>

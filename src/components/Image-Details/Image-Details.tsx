@@ -12,6 +12,7 @@ const ImageDetails = () => {
 	const [message, setMessage] = useState('');
 	const [show, setShow] = useState(false);
 	const [currentTimeout, setCurrentTimeout] = useState(setTimeout(() => {},0));
+	
 	const dispatch = useDispatch();
 	const selectedImage = useSelector((state: InitialState) => state.selected);
 	const images = useSelector((state: InitialState) => state.images);
@@ -34,18 +35,29 @@ const ImageDetails = () => {
 			clearTimeout(currentTimeout);
 		}
 		
-		setMessage(message);
-		setShow(true);
+		setTimeout(() => {
+			setMessage(message);
+			setShow(true);
+			
+			const timeOut = setTimeout(() => {
+				setShow(false);
+			}, 5_000);
+			
+			setCurrentTimeout(timeOut);
+		}, 0);
 		
-		const timeOut = setTimeout(() => {
-			setShow(false)
-		}, 5_000);
-		
-		setCurrentTimeout(timeOut);
 	};
 	
 	return (
 	  <section className={'image-details'}>
+		  <div className='action-bar'>
+			  <button className='btn outline normal' onClick={() => dispatch(deselectImage())}>
+				  Close
+				  <span className='material-icons material-icons-round'>
+					  close
+				  </span>
+			  </button>
+		  </div>
 		  {
 			selectedImage &&
 			  <>

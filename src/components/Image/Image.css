@@ -33,12 +33,17 @@
     outline-offset: 3px;
 }
 
-.bar{
+.bar {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
 }
 
-.file-name.large{
+.file-name.large {
     font-size: 1.2em;
+}
+
+.file-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

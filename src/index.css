@@ -55,23 +55,28 @@
     justify-content: center;
 }
 
-.btn.outline{
-    border-radius: 0.25em;
-    border: 1px solid var(--light-gray);
-    color: var(--gray);
-    width: 100%;
-    padding: 1em 2em;
+.btn.outline {
     font-size: 1.1em;
     font-weight: 600;
+    width: 100%;
+    padding: 1em 2em;
+    color: var(--gray);
+    border: 1px solid var(--light-gray);
+    border-radius: 0.25em;
 }
 
-.btn.outline.danger:hover{
+.btn.normal {
+    width: fit-content;
+    padding: 0.5em 2em;
+}
+
+.btn.outline.danger:hover {
     color: var(--red);
     background-color: rgba(211, 211, 211, 0.2);
 }
 
-.btn.outline.danger:active{
+.btn.outline.danger:active {
     color: white;
-    background-color: var(--red);
     border: none;
+    background-color: var(--red);
 }
