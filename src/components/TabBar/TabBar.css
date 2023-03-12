@@ -52,3 +52,9 @@
     border-radius: 500em;
     background-color: var(--primary);
 }
+
+@media screen and (width < 481px) {
+    .tab-button {
+        padding: 1em;
+    }
+}

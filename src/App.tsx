@@ -8,6 +8,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {setImages} from './store/images/images.actions';
 import ImageDetails from './components/Image-Details/Image-Details';
 import {InitialState} from './store/images/images.reducer';
+import Notification from './components/Notification/Notification';
 
 const App = () => {
 	
@@ -15,6 +16,10 @@ const App = () => {
 	
 	const dispatch = useDispatch();
 	const selectedImage: ImageModel | undefined = useSelector((state: InitialState) => state.selected);
+	
+	const [message, setMessage] = useState('');
+	const [show, setShow] = useState(false);
+	const [currentTimeout, setCurrentTimeout] = useState(setTimeout(() => {}, 0));
 	
 	useEffect(() => {
 		fetchData();
@@ -26,6 +31,24 @@ const App = () => {
 		dispatch(setImages(data.sort((image1: ImageModel, image2: ImageModel) => new Date(image1.createdAt) > new Date(image2.createdAt) ? -1 : 1)));
 	};
 	
+	const showNotification = (message: string) => {
+		if (currentTimeout) {
+			clearTimeout(currentTimeout);
+		}
+		
+		setTimeout(() => {
+			setMessage(message);
+			setShow(true);
+			
+			const timeOut = setTimeout(() => {
+				setShow(false);
+			}, 5_000);
+			
+			setCurrentTimeout(timeOut);
+		}, 0);
+		
+	};
+	
 	return (
 	  <div className={`app`}>
 		  <section className='content-section'>
@@ -34,8 +57,9 @@ const App = () => {
 			  <Gallery favoritesOnly={favouritesOnly}/>
 		  </section>
 		  <div className={`${selectedImage ? 'show' : ''} detail-section`}>
-			  <ImageDetails/>
+			  <ImageDetails showNotification={showNotification}/>
 		  </div>
+		  <Notification message={message} show={show}/>
 	  </div>
 	);
 };

@@ -1,17 +1,16 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './ImageDetails.css';
 import {useDispatch, useSelector} from 'react-redux';
 import {InitialState} from '../../store/images/images.reducer';
 import {ImageModel} from '../../models/image.model';
 import Image from '../Image/Image';
 import {deleteImage, deselectImage} from '../../store/images/images.actions';
-import Notification from '../Notification/Notification';
 
-const ImageDetails = () => {
-	
-	const [message, setMessage] = useState('');
-	const [show, setShow] = useState(false);
-	const [currentTimeout, setCurrentTimeout] = useState(setTimeout(() => {},0));
+interface ImageDetailsProps {
+	showNotification: any;
+}
+
+const ImageDetails = ({showNotification}: ImageDetailsProps) => {
 	
 	const dispatch = useDispatch();
 	const selectedImage = useSelector((state: InitialState) => state.selected);
@@ -28,24 +27,6 @@ const ImageDetails = () => {
 			
 			showNotification(`${selectedImage.filename} has been deleted!`)
 		}
-	};
-	
-	const showNotification = (message: string) => {
-		if (currentTimeout) {
-			clearTimeout(currentTimeout);
-		}
-		
-		setTimeout(() => {
-			setMessage(message);
-			setShow(true);
-			
-			const timeOut = setTimeout(() => {
-				setShow(false);
-			}, 5_000);
-			
-			setCurrentTimeout(timeOut);
-		}, 0);
-		
 	};
 	
 	return (
@@ -121,7 +102,6 @@ const ImageDetails = () => {
 				</p>
 			  </div>
 		  }
-		  <Notification message={message} show={show}/>
 	  </section>
 	);
 };
