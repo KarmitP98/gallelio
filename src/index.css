@@ -10,3 +10,60 @@
 #root, html, body {
     height: 100%;
 }
+
+:root{
+    --red: #F44336;
+    --gray: #757575;
+    --light-gray: #E0E0E0;
+    --hover-gray: rgba(211, 211, 211, 0.2);
+    --primary: #7986CB;
+    --primary-hover: #3949AB;
+
+}
+
+
+.icon-button{
+    padding: 8px;
+    border: none;
+    border-radius: 50%;
+    outline: none;
+    background-color: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;;
+}
+
+.icon-button:hover{
+    background-color: rgba(211, 211, 211, 0.2);
+}
+
+.btn{
+    outline: none;
+    background-color: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn.outline{
+    border-radius: 0.25em;
+    border: 1px solid var(--light-gray);
+    color: var(--gray);
+    width: 100%;
+    padding: 1em 2em;
+    font-size: 1.1em;
+    font-weight: 600;
+}
+
+.btn.outline.danger:hover{
+    color: var(--red);
+    background-color: rgba(211, 211, 211, 0.2);
+}
+
+.btn.outline.danger:active{
+    color: white;
+    background-color: var(--red);
+    border: none;
+}

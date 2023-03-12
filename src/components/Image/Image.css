@@ -3,7 +3,7 @@
     text-align: left;
 }
 
-.image {
+.image, .details-image {
     overflow: hidden;
     width: 100%;
     cursor: pointer;
@@ -15,16 +15,30 @@
     object-fit: cover;
 }
 
+.details-image{
+    cursor: default;
+}
+
 .image:hover {
     transform: scale(1.01);
 }
 
 .image:active {
-    outline: #5d91ff 3px solid;
+    outline: var(--primary-hover) 3px solid;
     outline-offset: 2px;
 }
 
 .image.selected {
-    outline: #0f3d98 3px solid;
-    outline-offset: 2px;
+    outline: var(--primary) 3px solid;
+    outline-offset: 3px;
+}
+
+.bar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.file-name.large{
+    font-size: 1.2em;
 }

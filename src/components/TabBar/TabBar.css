@@ -10,10 +10,10 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 3px;
+    height: 2px;
     content: '';
     border-radius: 500em;
-    background-color: lightgray;
+    background-color: var(--light-gray);
 }
 
 
@@ -24,7 +24,7 @@
     padding: 1em 2em;
     cursor: pointer;
     transition: all 0.25s ease-in-out;
-    color: gray;
+    color: var(--gray);
     border: none;
     border-radius: 0.25em 0.25em 0 0;
     outline: none;
@@ -32,12 +32,12 @@
 }
 
 .tab-button:hover {
-    color: #5d91ff;
+    color: var(--primary);
     background-color: rgba(211, 211, 211, 0.2);
 }
 
 .tab-button.active {
-    color: #5d91ff;
+    color: var(--primary);
 }
 
 .tab-button.active:before {
@@ -46,8 +46,8 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 3px;
+    height: 2px;
     content: '';
     border-radius: 500em;
-    background-color: #5d91ff;
+    background-color: var(--primary);
 }

@@ -2,24 +2,28 @@ import React from 'react';
 import './Image.css';
 import {ImageModel} from '../../models/image.model';
 import {useDispatch, useSelector} from 'react-redux';
-import {INITIAL_STATE} from '../../store/images/images.reducer';
-import {deselectImage, selectImage} from '../../store/images/images.actions';
+import {InitialState} from '../../store/images/images.reducer';
+import {deselectImage, favoriteImage, selectImage, unfavoriteImage} from '../../store/images/images.actions';
 
 export interface ImageProps {
-	image: ImageModel;
+	image: ImageModel,
+	details?: boolean,
+	favorited?: boolean
 }
 
 
-const Image = ({image}: ImageProps) => {
+const Image = ({image, details, favorited}: ImageProps) => {
 	
 	const dispatch = useDispatch();
-	const selectedImage = useSelector((state: INITIAL_STATE) => state.selected);
+	const selectedImage = useSelector((state: InitialState) => state.selected);
 	
 	const pickImage = () => {
-		if (selectedImage?.id === image.id) {
-			dispatch(deselectImage());
-		} else {
-			dispatch(selectImage(image));
+		if (!details) {
+			if (selectedImage?.id === image.id) {
+				dispatch(deselectImage());
+			} else {
+				dispatch(selectImage(image));
+			}
 		}
 	};
 	
@@ -28,10 +32,21 @@ const Image = ({image}: ImageProps) => {
 	return (
 	  <div className={'image-container'}>
 		  <img
-			src={image.url} alt={image.filename} className={`image ${selectedImage?.id === image.id ? 'selected' : ''}`}
+			src={image.url} alt={image.filename}
+			className={`${details ? 'details-image': 'image'} ${selectedImage?.id === image.id && !details ? 'selected' : ''}`}
 			onClick={pickImage}
 		  />
-		  <h5 className='file-name'>{image.filename}</h5>
+		  <div className='bar'>
+			  <h5 className={`file-name ${details ? 'large' : ''}`}>{image.filename}</h5>
+			  {
+				details &&
+				  <button className={'icon-button'} onClick={() => dispatch(favorited ? unfavoriteImage(image): favoriteImage(image))}>
+					<span className='material-icons material-icons-round' style={{color: favorited ? 'var(--red)':'var(--gray)'}}>
+						{favorited ? 'favorite' :'favorite_border'}
+					</span>
+				  </button>
+			  }
+		  </div>
 		  <p className='size'>{sizeInMB()} MB</p>
 	  </div>
 	);

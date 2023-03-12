@@ -2,12 +2,12 @@ import {CustomAction} from '../index';
 import {ImageModel} from '../../models/image.model';
 import {ImageActions} from './images.actions';
 
-export interface INITIAL_STATE {
+export interface InitialState {
 	images: ImageModel[],
 	selected: ImageModel | undefined
 }
 
-export const INITIAL_STATE: INITIAL_STATE = {
+export const INITIAL_STATE: InitialState = {
 	images: [],
 	selected: undefined
 };

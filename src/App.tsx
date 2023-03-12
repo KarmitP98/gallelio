@@ -4,19 +4,21 @@ import {FETCH_URL} from './constants/api';
 import Gallery from './components/Gallery/Gallery';
 import {ImageModel} from './models/image.model';
 import TabBar from './components/TabBar/TabBar';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {setImages} from './store/images/images.actions';
+import ImageDetails from './components/Image-Details/Image-Details';
+import {InitialState} from './store/images/images.reducer';
 
 const App = () => {
 	
-	const initialData: ImageModel[] = [];
 	const [favouritesOnly, setFavouritesOnly] = useState(false);
+	
 	const dispatch = useDispatch();
+	const selectedImage: ImageModel | undefined = useSelector((state: InitialState) => state.selected);
 	
 	useEffect(() => {
 		fetchData();
 	}, []);
-	
 	const fetchData = async () => {
 		const json = await fetch(FETCH_URL, {method: 'GET'});
 		const data: ImageModel[] = await json.json();
@@ -26,12 +28,15 @@ const App = () => {
 	};
 	
 	return (
-	  <div className='app'>
+	  <div className={`app`}>
 		  <section className='content-section'>
 			  <h1>Gallelio</h1>
 			  <TabBar setFavouritesOnly={setFavouritesOnly} favouritesOnly={favouritesOnly}/>
 			  <Gallery favoritesOnly={favouritesOnly}/>
 		  </section>
+		  <div className='detail-section'>
+			  <ImageDetails/>
+		  </div>
 	  </div>
 	);
 };
