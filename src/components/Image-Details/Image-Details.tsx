@@ -86,6 +86,7 @@ const ImageDetails = ({showNotification}: ImageDetailsProps) => {
 				  Delete
 				</button>
 				<br/>
+				<br/>
 			  </>
 		  }
 		  {
