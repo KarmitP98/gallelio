@@ -1,12 +1,17 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './ImageDetails.css';
 import {useDispatch, useSelector} from 'react-redux';
 import {InitialState} from '../../store/images/images.reducer';
 import {ImageModel} from '../../models/image.model';
 import Image from '../Image/Image';
 import {deleteImage, deselectImage} from '../../store/images/images.actions';
+import Notification from '../Notification/Notification';
 
 const ImageDetails = () => {
+	
+	const [message, setMessage] = useState('');
+	const [show, setShow] = useState(false);
+	const [currentTimeout, setCurrentTimeout] = useState(setTimeout(() => {},0));
 	const dispatch = useDispatch();
 	const selectedImage = useSelector((state: InitialState) => state.selected);
 	const images = useSelector((state: InitialState) => state.images);
@@ -19,7 +24,24 @@ const ImageDetails = () => {
 		if (selectedImage) {
 			dispatch(deleteImage(selectedImage));
 			dispatch(deselectImage());
+			
+			showNotification(`${selectedImage.filename} has been deleted!`)
 		}
+	};
+	
+	const showNotification = (message: string) => {
+		if (currentTimeout) {
+			clearTimeout(currentTimeout);
+		}
+		
+		setMessage(message);
+		setShow(true);
+		
+		const timeOut = setTimeout(() => {
+			setShow(false)
+		}, 5_000);
+		
+		setCurrentTimeout(timeOut);
 	};
 	
 	return (
@@ -77,16 +99,17 @@ const ImageDetails = () => {
 			  <div className={'none-selected'}>
 				<h2>
 				  No Image Selected!
-				  <span className="material-icons material-icons-round">
+				  <span className='material-icons material-icons-round'>
 					sentiment_dissatisfied
 				  </span>
 				</h2>
-			    <br/>
-			    <p>
-			      Start by selecting an image from the left...
-			    </p>
+				<br/>
+				<p>
+				  Start by selecting an image from the left...
+				</p>
 			  </div>
 		  }
+		  <Notification message={message} show={show}/>
 	  </section>
 	);
 };

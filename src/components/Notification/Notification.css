@@ -1,0 +1,22 @@
+.notification{
+    display: flex;
+    flex-flow: column nowrap;
+    background-color: var(--primary-hover);
+    border-radius: 0.5em;
+    position: fixed;
+    bottom: 2em;
+    right: 2em;
+    padding: 1em 2em;
+    text-align: left;
+    color: white;
+    width: clamp(250px, fit-content, 90vw);
+    transition: all 0.25s ease-in-out;
+    transform: scale(0);
+    opacity: 0;
+    transform-origin: center right;
+}
+
+.show{
+    transform: scale(1);
+    opacity: 1;
+}

@@ -8,6 +8,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {setImages} from './store/images/images.actions';
 import ImageDetails from './components/Image-Details/Image-Details';
 import {InitialState} from './store/images/images.reducer';
+import Notification from './components/Notification/Notification';
 
 const App = () => {
 	
